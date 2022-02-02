@@ -14,7 +14,6 @@
 // ==/UserScript==
 /* globals jQuery, waitForKeyElements */
 
-/* Button designed to match the M1 Theme*/
 const setElement = (el, obj) => {
   let element = document.createElement(el)
   obj.class ? element.classList.add(...obj.class) : null
@@ -31,8 +30,7 @@ const setElement = (el, obj) => {
   return element
 }
 
-const processBtn = () => {
-  /* Create button on the DOM */
+const createBtn = () => {
   let style = document.createElement('style')
   style.type = 'text/css'
   style.innerHTML = `.replacementCSS { background-color: rgb(217, 222, 245); border-radius: 16px; padding: 6px 16px; }`
@@ -51,8 +49,9 @@ const processBtn = () => {
   let btn = document.querySelectorAll('.iptKJC')
   let btnLen = Array.from(btn).length
   btn[btnLen-1].after(mainDiv)
+}
 
-  /* On click function */
+const copyData = () => {
   let divBtn = document.querySelector('#TMbutton')
 
   divBtn.addEventListener('copy', e => {
@@ -72,18 +71,15 @@ const processBtn = () => {
 
     alert('Total Dividends $'+divTotal.toFixed(2))
     let table = `<table><tbody>`+tblRows+`</tbody></table>`
-    /*  Can't use because Google Chrome does not support the ClipboardItem constructor
-    let dat = new Blob()
-    let data = [new ClipboardItem({ "text/html": new Blob([table], { type: "text/html" }) })]
-    navigator.clipboard.write(data).then(function() {
-      console.log("Copied to clipboard successfully!");
-    }, function() {
-      console.error("Unable to write to clipboard. :-(");
-    })*/
 
     e.clipboardData.setData('text/html', table)
     e.preventDefault()
   })
 }
 
-waitForKeyElements ( 'div.eBXlUG', processBtn)
+const initiateBtn = () => {
+  createBtn()
+  copyData()
+}
+
+waitForKeyElements ( 'div.eBXlUG', initiateBtn)
