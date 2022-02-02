@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         M1 Dividend Button
 // @namespace    http://tampermonkey.net/
-// @version      0.0.1
+// @version      1.0.0
+// @updateURL  https://raw.githubusercontent.com/sauld95/M1_Dividend_Table/main/M1%20Dividend%20Table.js
+// @downloadURL  https://raw.githubusercontent.com/sauld95/M1_Dividend_Table/main/M1%20Dividend%20Table.js
 // @description  Copy a table of the dividend
 // @author       Saul D
 // @match        https://dashboard.m1finance.com/d/invest/activity
