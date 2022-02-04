@@ -3,8 +3,8 @@ Userscript for Tampermonkey scrapes the activities page into an HTML table onto 
 
 ## Table of Content
 
--   [Process](https://github.com/sauld95/M1_Dividend_Table/edit/main/README.md#process)
--   [Styling](https://github.com/sauld95/M1_Dividend_Table/edit/main/README.md#Styling)
+-   [Process](https://github.com/sauld95/M1_Dividend_Table/blob/main/README.md#process)
+-   [Styling](https://github.com/sauld95/M1_Dividend_Table/blob/main/README.md#Styling)
 ## Process
 ```javascript
 // Checks if the class provided in the argument loads on the page first before running the code
