@@ -1,16 +1,17 @@
 // ==UserScript==
 // @name         M1 Dividend Button
 // @namespace    http://tampermonkey.net/
-// @version      1.0.0
+// @version      2.0.0
 // @updateURL  https://raw.githubusercontent.com/sauld95/M1_Dividend_Table/main/M1%20Dividend%20Table.js
 // @downloadURL  https://raw.githubusercontent.com/sauld95/M1_Dividend_Table/main/M1%20Dividend%20Table.js
 // @description  Copy a table of the dividend
+// @description:es Copiar una tabla del dividendo
 // @author       Saul D
 // @match        https://dashboard.m1finance.com/d/invest/activity
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=m1finance.com
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js
 // @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
-// @grant        none
+// @grant        GM_setClipboard
 // ==/UserScript==
 /* globals jQuery, waitForKeyElements */
 
@@ -31,16 +32,11 @@ const setElement = (el, obj) => {
 }
 
 const createBtn = () => {
-  let style = document.createElement('style')
-  style.type = 'text/css'
-  style.innerHTML = `.replacementCSS { background-color: rgb(217, 222, 245); border-radius: 16px; padding: 6px 16px; }`
-  document.querySelector('head').appendChild(style)
-
   let span = setElement('span', {class: ['ihURts', 'eqIqlk'], 'font-size': '14px', 'font-weight': '600'})
   let text = document.createTextNode('Copy This Text')
   span.appendChild(text)
 
-  let subDiv = setElement('div', {class: ['replacementCSS', 'ikdNEJ'], id: 'subDiv', display: 'flex'})
+  let subDiv = setElement('div', {class: ['jhpGEN', 'ikdNEJ'], id: 'subDiv', display: 'flex'})
   subDiv.appendChild(span)
 
   let mainDiv = setElement('div', {class: ['iptKJC'], id: 'TMbutton'})
@@ -54,7 +50,7 @@ const createBtn = () => {
 const copyData = () => {
   let divBtn = document.querySelector('#TMbutton')
 
-  divBtn.addEventListener('copy', e => {
+  divBtn.addEventListener('click', () => {
     let set = Array.from(document.querySelectorAll('.gMuZof'))
     let tblRows = ''
     let divTotal = 0
@@ -72,8 +68,7 @@ const copyData = () => {
     alert('Total Dividends $'+divTotal.toFixed(2))
     let table = `<table><tbody>`+tblRows+`</tbody></table>`
 
-    e.clipboardData.setData('text/html', table)
-    e.preventDefault()
+    GM_setClipboard(table, {mimetype: 'text/html'})
   })
 }
 
